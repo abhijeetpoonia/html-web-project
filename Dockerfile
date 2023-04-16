@@ -7,6 +7,7 @@ RUN apt-get update && \
         apt-get install -y vim && \
     rm -rf /etc/nginx/sites-available/default && \
     rm -rf /etc/nginx/sites-enabled/default && \
+    sed -i '/^daemon/d' /etc/nginx/nginx.conf && \
     echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Copy website files and create website configuration
@@ -18,4 +19,5 @@ RUN ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/
 EXPOSE 80
 
 # Start nginx when container starts
-CMD ["nginx",]
+CMD ["nginx"]
+
